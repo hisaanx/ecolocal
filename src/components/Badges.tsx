@@ -36,7 +36,7 @@ const ALL_BADGES = [
     emoji: "📍",
   },
   {
-    id: "carbon_champion",
+    id: "planet_hero",
     name: "Planet Hero",
     description: "Save 10 kg of CO₂ total",
     emoji: "🌍",
