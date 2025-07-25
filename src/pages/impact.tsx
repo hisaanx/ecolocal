@@ -5,7 +5,7 @@ import WaterImpactChart from "@/components/WaterImpactChart";
 
 export default function ImpactPage() {
   return (
-    <main className="max-w-3xl mx-auto px-4 pb-10">
+    <main className="max-w-3xl mx-auto px-4 pt-28 pb-10">
       <h1 className="text-3xl font-extrabold mb-6 text-green-800">
         Your Weekly Eco Impact
       </h1>

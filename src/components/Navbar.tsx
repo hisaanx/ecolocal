@@ -8,8 +8,8 @@ export default function Navbar() {
   const [user] = useAuthState(auth);
 
   return (
-    <nav className="bg-white/90 backdrop-blur-md shadow-md px-4 py-3 w-full z-40">
-      <div className="max-w-6xl mx-auto relative flex items-center justify-between">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md px-4 py-3 rounded-b-xl">
+      <div className="max-w-6xl mx-auto grid grid-cols-3 items-center">
         {/* Left: Logo */}
         <div className="flex items-center gap-2">
           <img src="/ecolocal-logo.png" alt="Logo" className="h-8 w-8" />
@@ -21,29 +21,41 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Center: Navigation Links (absolutely centered on desktop) */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 hidden sm:flex gap-6 text-sm font-medium text-green-800">
-          <Link href="/" className="hover:text-green-600 transition">
+        {/* Center: Navigation Links */}
+        <div className="flex justify-center gap-6 text-sm font-medium text-green-800">
+          <Link
+            href="/"
+            className="hover:text-green-600 transition duration-200"
+          >
             Home
           </Link>
-          <Link href="/dashboard" className="hover:text-green-600 transition">
+          <Link
+            href="/dashboard"
+            className="hover:text-green-600 transition duration-200"
+          >
             Dashboard
           </Link>
-          <Link href="/impact" className="hover:text-green-600 transition">
+          <Link
+            href="/impact"
+            className="hover:text-green-600 transition duration-200"
+          >
             Weekly Impact
           </Link>
-          <Link href="/nearby" className="hover:text-green-600 transition">
+          <Link
+            href="/nearby"
+            className="hover:text-green-600 transition duration-200"
+          >
             Nearby
           </Link>
         </div>
 
         {/* Right: User Info */}
-        <div className="flex items-center gap-2">
+        <div className="flex justify-end items-center gap-2">
           {user ? (
             <>
               <img
                 src={
-                  user?.photoURL?.includes("http")
+                  user?.photoURL && user.photoURL.includes("http")
                     ? user.photoURL
                     : "/default-avatar.png"
                 }

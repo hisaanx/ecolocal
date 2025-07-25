@@ -253,7 +253,7 @@ export default function NearbySpots() {
   }, []);
 
   return (
-    <div className="min-h-screen px-6 pb-20 bg-transparent">
+    <div className="min-h-screen px-6 pt-24 pb-20 bg-transparent">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-quicksand font-semibold text-center mb-10 flex items-center justify-center gap-2">
           <span className="text-4xl">🌍</span>
