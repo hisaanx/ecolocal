@@ -8,21 +8,21 @@ export default function Navbar() {
   const [user] = useAuthState(auth);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md px-4 py-3">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center sm:justify-between gap-2 sm:gap-0">
-        {/* Logo */}
+    <nav className="bg-white/90 backdrop-blur-md shadow-md px-4 py-3 w-full z-40">
+      <div className="max-w-6xl mx-auto relative flex items-center justify-between">
+        {/* Left: Logo */}
         <div className="flex items-center gap-2">
           <img src="/ecolocal-logo.png" alt="Logo" className="h-8 w-8" />
           <Link
             href="/"
-            className="text-xl font-bold text-green-700 hover:text-green-800"
+            className="text-xl font-bold text-green-700 hover:text-green-800 transition"
           >
             EcoLocal
           </Link>
         </div>
 
-        {/* Navigation Links */}
-        <div className="flex flex-wrap justify-center gap-4 text-sm font-medium text-green-800 mt-2 sm:mt-0">
+        {/* Center: Navigation Links (absolutely centered on desktop) */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 hidden sm:flex gap-6 text-sm font-medium text-green-800">
           <Link href="/" className="hover:text-green-600 transition">
             Home
           </Link>
@@ -37,8 +37,8 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* User Info */}
-        <div className="flex items-center gap-2 mt-2 sm:mt-0">
+        {/* Right: User Info */}
+        <div className="flex items-center gap-2">
           {user ? (
             <>
               <img
@@ -55,7 +55,7 @@ export default function Navbar() {
               </span>
               <button
                 onClick={() => signOut(auth)}
-                className="text-red-500 hover:underline text-sm"
+                className="text-red-500 hover:underline ml-2 text-sm"
               >
                 Logout
               </button>

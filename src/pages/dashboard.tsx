@@ -258,7 +258,7 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="min-h-screen px-4 pt-24 pb-10 bg-transparent">
+    <main className="min-h-screen px-4 pb-10 bg-transparent">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-2xl font-bold text-green-800 mb-4">
           Today's Eco Challenges
