@@ -3,9 +3,11 @@ import { auth } from "@/lib/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { provider, signInWithPopup } from "@/lib/firebase";
+import { useState } from "react";
 
 export default function Navbar() {
   const [user] = useAuthState(auth);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md px-4 py-3 rounded-b-xl">
@@ -21,8 +23,8 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Center: Navigation Links */}
-        <div className="flex justify-center gap-6 text-sm font-medium text-green-800">
+        {/* Center: Desktop Navigation Links - Hidden on mobile */}
+        <div className="hidden md:flex justify-center gap-6 text-sm font-medium text-green-800">
           <Link
             href="/"
             className="hover:text-green-600 transition duration-200"
@@ -49,10 +51,41 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Right: User Info */}
-        <div className="flex justify-end items-center gap-2">
+        {/* Right: User Info + Mobile Menu Button */}
+        <div className="flex items-center gap-2 justify-end">
+          {/* Mobile menu button - Only visible on mobile */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-green-700 hover:bg-green-50 rounded-md transition"
+            aria-label="Toggle menu"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {mobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+
+          {/* User info */}
           {user ? (
-            <>
+            <div className="flex items-center gap-2">
               <img
                 src={
                   user?.photoURL && user.photoURL.includes("http")
@@ -62,16 +95,16 @@ export default function Navbar() {
                 alt="avatar"
                 className="w-8 h-8 rounded-full border border-green-400 object-cover"
               />
-              <span className="text-green-800 font-semibold hidden sm:inline">
+              <span className="text-green-800 font-semibold hidden sm:inline text-sm">
                 Hi, {user.displayName?.split(" ")[0] || "User"}
               </span>
               <button
                 onClick={() => signOut(auth)}
-                className="text-red-500 hover:underline ml-2 text-sm"
+                className="text-red-500 hover:underline text-sm"
               >
                 Logout
               </button>
-            </>
+            </div>
           ) : (
             <button
               onClick={() => signInWithPopup(auth, provider)}
@@ -82,6 +115,42 @@ export default function Navbar() {
           )}
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden mt-3 pb-3 border-t border-green-200">
+          <div className="flex flex-col space-y-2 px-4 pt-3">
+            <Link
+              href="/"
+              className="text-green-800 hover:text-green-600 py-2 transition duration-200"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              href="/dashboard"
+              className="text-green-800 hover:text-green-600 py-2 transition duration-200"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Dashboard
+            </Link>
+            <Link
+              href="/impact"
+              className="text-green-800 hover:text-green-600 py-2 transition duration-200"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Weekly Impact
+            </Link>
+            <Link
+              href="/nearby"
+              className="text-green-800 hover:text-green-600 py-2 transition duration-200"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Nearby
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
