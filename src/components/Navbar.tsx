@@ -8,54 +8,42 @@ export default function Navbar() {
   const [user] = useAuthState(auth);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md px-4 py-3 rounded-b-xl">
-      <div className="max-w-6xl mx-auto grid grid-cols-3 items-center">
-        {/* Left: Logo */}
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md px-4 py-3">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center sm:justify-between gap-2 sm:gap-0">
+        {/* Logo */}
         <div className="flex items-center gap-2">
           <img src="/ecolocal-logo.png" alt="Logo" className="h-8 w-8" />
           <Link
             href="/"
-            className="text-xl font-bold text-green-700 hover:text-green-800 transition"
+            className="text-xl font-bold text-green-700 hover:text-green-800"
           >
             EcoLocal
           </Link>
         </div>
 
-        {/* Center: Navigation Links */}
-        <div className="flex justify-center gap-6 text-sm font-medium text-green-800">
-          <Link
-            href="/"
-            className="hover:text-green-600 transition duration-200"
-          >
+        {/* Navigation Links */}
+        <div className="flex flex-wrap justify-center gap-4 text-sm font-medium text-green-800 mt-2 sm:mt-0">
+          <Link href="/" className="hover:text-green-600 transition">
             Home
           </Link>
-          <Link
-            href="/dashboard"
-            className="hover:text-green-600 transition duration-200"
-          >
+          <Link href="/dashboard" className="hover:text-green-600 transition">
             Dashboard
           </Link>
-          <Link
-            href="/impact"
-            className="hover:text-green-600 transition duration-200"
-          >
+          <Link href="/impact" className="hover:text-green-600 transition">
             Weekly Impact
           </Link>
-          <Link
-            href="/nearby"
-            className="hover:text-green-600 transition duration-200"
-          >
+          <Link href="/nearby" className="hover:text-green-600 transition">
             Nearby
           </Link>
         </div>
 
-        {/* Right: User Info */}
-        <div className="flex justify-end items-center gap-2">
+        {/* User Info */}
+        <div className="flex items-center gap-2 mt-2 sm:mt-0">
           {user ? (
             <>
               <img
                 src={
-                  user?.photoURL && user.photoURL.includes("http")
+                  user?.photoURL?.includes("http")
                     ? user.photoURL
                     : "/default-avatar.png"
                 }
@@ -67,7 +55,7 @@ export default function Navbar() {
               </span>
               <button
                 onClick={() => signOut(auth)}
-                className="text-red-500 hover:underline ml-2 text-sm"
+                className="text-red-500 hover:underline text-sm"
               >
                 Logout
               </button>
