@@ -52,11 +52,11 @@ export default function Navbar() {
         </div>
 
         {/* Right: User Info + Mobile Menu Button */}
-        <div className="flex items-center gap-2 justify-end">
-          {/* Mobile menu button - Only visible on mobile */}
+        <div className="flex items-center justify-end w-full">
+          {/* Mobile menu button - Only visible on mobile, positioned more to the left */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-green-700 hover:bg-green-50 rounded-md transition"
+            className="md:hidden p-2 text-green-700 hover:bg-green-50 rounded-md transition mr-4"
             aria-label="Toggle menu"
           >
             <svg
@@ -83,7 +83,7 @@ export default function Navbar() {
             </svg>
           </button>
 
-          {/* User info */}
+          {/* User info - positioned at the far right */}
           {user ? (
             <div className="flex items-center gap-2">
               <img
